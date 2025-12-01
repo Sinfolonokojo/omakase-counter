@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omakase Counter - Icon Generator</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #F8F7F4;
+    }
+    h1 {
+      color: #2C3E50;
+      text-align: center;
+    }
+    .canvas-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .canvas-wrapper {
+      text-align: center;
+    }
+    canvas {
+      border: 2px solid #E8E8E8;
+      border-radius: 20px;
+      background: #2C3E50;
+    }
+    button {
+      background: #FF6B6B;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #ff5252;
+    }
+    .instructions {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+    .instructions h2 {
+      color: #2C3E50;
+      margin-top: 0;
+    }
+    .instructions ol {
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍣 Omakase Counter - Icon Generator</h1>
+
+  <div class="canvas-container">
+    <div class="canvas-wrapper">
+      <canvas id="icon-192" width="192" height="192"></canvas>
+      <br>
+      <button onclick="downloadIcon('icon-192', 'icon-192.png')">Download 192x192</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="icon-512" width="512" height="512"></canvas>
+      <br>
+      <button onclick="downloadIcon('icon-512', 'icon-512.png')">Download 512x512</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="apple-touch-icon" width="180" height="180"></canvas>
+      <br>
+      <button onclick="downloadIcon('apple-touch-icon', 'apple-touch-icon.png')">Download 180x180 (iOS)</button>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h2>Instructions</h2>
+    <ol>
+      <li>Click each "Download" button to save the icons</li>
+      <li>Move the downloaded PNG files to your <code>public/</code> folder</li>
+      <li>Replace any existing icon files</li>
+      <li>Your PWA will now be ready to install on iOS!</li>
+    </ol>
+    <p><strong>Note:</strong> The icons use your app's colors (charcoal background with rice/salmon sushi emoji) and will look great on iOS home screens.</p>
+  </div>
+
+  <script>
+    function drawIcon(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+
+      // Background
+      ctx.fillStyle = '#2C3E50';
+      ctx.fillRect(0, 0, size, size);
+
+      // Sushi emoji
+      ctx.font = `${size * 0.6}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🍣', size / 2, size / 2);
+    }
+
+    function downloadIcon(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Draw all icons on load
+    window.onload = () => {
+      drawIcon('icon-192');
+      drawIcon('icon-512');
+      drawIcon('apple-touch-icon');
+    };
+  </script>
+</body>
+</html>
