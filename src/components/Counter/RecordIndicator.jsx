@@ -1,11 +1,15 @@
 import { motion } from 'framer-motion';
 import { Trophy } from 'lucide-react';
+import { useLanguage } from '../../hooks/useLanguage.jsx';
+
 
 export const RecordIndicator = ({ personalRecord, isNewRecord }) => {
+  const { t } = useLanguage();
+
   if (personalRecord === 0) {
     return (
       <div className="text-center py-4">
-        <p className="text-gray-500 text-sm">Start your first session!</p>
+        <p className="text-gray-500 text-sm">{t('startFirstSession')}</p>
       </div>
     );
   }
@@ -20,7 +24,7 @@ export const RecordIndicator = ({ personalRecord, isNewRecord }) => {
     >
       <Trophy size={20} className={isNewRecord ? 'text-salmon' : 'text-gray-500'} />
       <span className="text-sm font-medium">
-        {isNewRecord ? 'New Record!' : `Personal Best: ${personalRecord} pieces`}
+        {isNewRecord ? t('newRecord') : `${t('personalBest')}: ${personalRecord} ${t('pieces')}`}
       </span>
     </motion.div>
   );

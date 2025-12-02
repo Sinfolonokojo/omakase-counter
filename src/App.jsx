@@ -6,6 +6,7 @@ import { useCounter } from './hooks/useCounter';
 import { useCamera } from './hooks/useCamera';
 import { useShare } from './hooks/useShare';
 import { useIndexedDB, useSessions, useSushiTypes } from './hooks/useIndexedDB';
+import { useLanguage } from './hooks/useLanguage.jsx';
 
 // Components
 import { CounterDisplay } from './components/Counter/CounterDisplay';
@@ -19,6 +20,7 @@ import { TypeGrid } from './components/SushiTypes/TypeGrid';
 import { FloatingSushi } from './components/Animations/FloatingSushi';
 import { AnimatedBackground } from './components/Animations/AnimatedBackground';
 import { WaveEffect } from './components/Animations/WaveEffect';
+import { LanguageSwitcher } from './components/Language/LanguageSwitcher';
 import { savePhoto } from './utils/db';
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
   const [tapPosition, setTapPosition] = useState({ x: 0, y: 0 });
 
   // Hooks
+  const { t } = useLanguage();
   const { isReady } = useIndexedDB();
   const {
     count,
@@ -122,7 +125,7 @@ function App() {
       <div className="min-h-screen bg-rice flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🍣</div>
-          <p className="text-gray-600">Loading Omakase Counter...</p>
+          <p className="text-gray-600">{t('loading')}</p>
         </div>
       </div>
     );
@@ -139,9 +142,15 @@ function App() {
         <div className="fixed inset-0 pb-20 flex flex-col bg-rice">
           {/* Top bar with record and info */}
           <div className="flex-shrink-0 px-4 pt-8 pb-4">
-            <h1 className="text-3xl font-heading font-bold text-center text-charcoal mb-4">
-              Omakase Counter
-            </h1>
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex-1"></div>
+              <h1 className="text-3xl font-heading font-bold text-center text-charcoal flex-1">
+                {t('appName')}
+              </h1>
+              <div className="flex-1 flex justify-end">
+                <LanguageSwitcher />
+              </div>
+            </div>
             <RecordIndicator
               personalRecord={personalRecord}
               isNewRecord={isNewRecord}
@@ -159,7 +168,7 @@ function App() {
           >
             <div className="text-center">
               <CounterDisplay count={count} isNewRecord={isNewRecord} />
-              <p className="text-gray-400 text-sm mt-4">Tap anywhere to count</p>
+              <p className="text-gray-400 text-sm mt-4">{t('tapAnywhere')}</p>
             </div>
           </div>
 
@@ -170,7 +179,7 @@ function App() {
           <div className="flex-shrink-0 px-4 pb-4 space-y-3">
             {selectedSushiTypes.length > 0 && (
               <div className="text-center">
-                <p className="text-xs text-gray-500 mb-2">Today's selection:</p>
+                <p className="text-xs text-gray-500 mb-2">{t('todaysSelection')}</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {selectedSushiTypes.slice(0, 5).map((typeId) => (
                     <span
@@ -182,7 +191,7 @@ function App() {
                   ))}
                   {selectedSushiTypes.length > 5 && (
                     <span className="text-xs px-3 py-1 text-gray-500">
-                      +{selectedSushiTypes.length - 5} more
+                      +{selectedSushiTypes.length - 5} {t('more')}
                     </span>
                   )}
                 </div>
@@ -198,7 +207,7 @@ function App() {
                   }}
                   className="text-sm text-gray-500 hover:text-gray-700 underline"
                 >
-                  End session and save
+                  {t('endSession')}
                 </button>
               </div>
             )}
@@ -212,34 +221,37 @@ function App() {
           <div className="container mx-auto px-4 py-8 max-w-2xl">
             {/* Header */}
             <header className="text-center mb-8">
-              <h1 className="text-4xl font-heading font-bold text-charcoal mb-2">
-                Omakase Counter
-              </h1>
-              <p className="text-gray-600 text-sm">お任せカウンター</p>
+              <div className="flex justify-center items-center gap-4 mb-2">
+                <h1 className="text-4xl font-heading font-bold text-charcoal">
+                  {t('appName')}
+                </h1>
+                <LanguageSwitcher />
+              </div>
+              <p className="text-gray-600 text-sm">{t('appSubtitle')}</p>
             </header>
 
             {/* Types Tab */}
             {activeTab === 'types' && (
               <div>
                 <h2 className="text-2xl font-heading font-bold text-charcoal mb-4">
-                  Sushi Types
+                  {t('sushiTypes')}
                 </h2>
                 <p className="text-gray-600 text-sm mb-6">
-                  Tap to select the types you're eating in your current session
+                  {t('sushiTypesDescription')}
                 </p>
                 {typesLoading ? (
                   <div className="text-center py-12">
-                    <p className="text-gray-500">Loading types...</p>
+                    <p className="text-gray-500">{t('loadingTypes')}</p>
                   </div>
                 ) : (
                   <>
                     {selectedSushiTypes.length > 0 && (
                       <div className="mb-6 p-4 bg-charcoal text-white rounded-lg">
                         <p className="text-sm font-medium mb-1">
-                          ✓ {selectedSushiTypes.length} {selectedSushiTypes.length === 1 ? 'type' : 'types'} selected
+                          ✓ {selectedSushiTypes.length} {selectedSushiTypes.length === 1 ? t('typeSelected') : t('typesSelected')}
                         </p>
                         <p className="text-xs opacity-80">
-                          These will be saved with your session
+                          {t('theseWillBeSaved')}
                         </p>
                       </div>
                     )}
@@ -257,7 +269,7 @@ function App() {
             {activeTab === 'history' && (
               <div>
                 <h2 className="text-2xl font-heading font-bold text-charcoal mb-6">
-                  Your Sessions
+                  {t('yourSessions')}
                 </h2>
                 <SessionList
                   sessions={sessions}

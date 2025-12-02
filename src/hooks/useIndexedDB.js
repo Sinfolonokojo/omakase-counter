@@ -31,8 +31,10 @@ export const useIndexedDB = () => {
 export const useSessions = () => {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { isReady } = useIndexedDB();
 
   const loadSessions = async () => {
+    if (!isReady) return;
     setLoading(true);
     try {
       const allSessions = await getAllSessions();
@@ -50,7 +52,7 @@ export const useSessions = () => {
 
   useEffect(() => {
     loadSessions();
-  }, []);
+  }, [isReady]);
 
   return { sessions, loading, refreshSessions: loadSessions };
 };
@@ -58,8 +60,10 @@ export const useSessions = () => {
 export const useSushiTypes = () => {
   const [sushiTypes, setSushiTypes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { isReady } = useIndexedDB();
 
   const loadSushiTypes = async () => {
+    if (!isReady) return;
     setLoading(true);
     try {
       const types = await getAllSushiTypes();
@@ -73,7 +77,7 @@ export const useSushiTypes = () => {
 
   useEffect(() => {
     loadSushiTypes();
-  }, []);
+  }, [isReady]);
 
   return { sushiTypes, loading, refreshSushiTypes: loadSushiTypes };
 };

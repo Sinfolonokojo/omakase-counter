@@ -1,10 +1,13 @@
 import { Home, History, UtensilsCrossed } from 'lucide-react';
+import { useLanguage } from '../../hooks/useLanguage.jsx';
 
 export const Navigation = ({ activeTab, onTabChange }) => {
+  const { t } = useLanguage();
+
   const tabs = [
-    { id: 'counter', icon: Home, label: 'Counter' },
-    { id: 'types', icon: UtensilsCrossed, label: 'Types' },
-    { id: 'history', icon: History, label: 'History' },
+    { id: 'counter', icon: Home, label: t('navCounter') },
+    { id: 'types', icon: UtensilsCrossed, label: t('navTypes') },
+    { id: 'history', icon: History, label: t('navHistory') },
   ];
 
   return (
