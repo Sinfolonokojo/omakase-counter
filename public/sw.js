@@ -1,62 +1,57 @@
-const CACHE_NAME = 'omakase-counter-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-];
+// v2: network-first for navigations so new deploys are always picked up.
+// v1 served index.html cache-first forever, which left iOS pointing at
+// deleted hashed bundles after each deploy (blank screen).
+const CACHE_NAME = 'omakase-counter-v2';
 
-// Install service worker and cache resources
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Opened cache');
-      return cache.addAll(urlsToCache);
-    })
-  );
+self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-// Fetch resources from cache when offline
+// Delete old caches (including the poisoned v1 cache) on activation
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((names) =>
+        Promise.all(
+          names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
+        )
+      )
+      .then(() => self.clients.claim())
+  );
+});
+
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      // Cache hit - return response
-      if (response) {
-        return response;
-      }
+  const { request } = event;
 
-      return fetch(event.request).then((response) => {
-        // Check if valid response
-        if (!response || response.status !== 200 || response.type !== 'basic') {
+  if (request.method !== 'GET') return;
+
+  // Navigations: network first, cached shell only as offline fallback
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put('/', copy));
           return response;
+        })
+        .catch(() => caches.match('/'))
+    );
+    return;
+  }
+
+  // Static assets (hashed filenames): cache first, network fallback
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(request).then((response) => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         }
-
-        // Clone the response
-        const responseToCache = response.clone();
-
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-
         return response;
       });
     })
   );
-});
-
-// Clean up old caches
-self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-  self.clients.claim();
 });
