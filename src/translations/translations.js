@@ -2,6 +2,8 @@ export const translations = {
   en: {
     // App Header
     appName: 'Sushi Counter for Natha 💗',
+    appNameMain: 'Sushi Counter',
+    appNameDedication: 'for Natha 💗',
     appSubtitle: 'お任せカウンター',
     credit: 'by Sinfolo Nokojo',
     loading: 'Loading Sushi Counter...',
@@ -74,6 +76,8 @@ export const translations = {
   es: {
     // App Header
     appName: 'Contador de Sushi para Natha 💗',
+    appNameMain: 'Contador de Sushi',
+    appNameDedication: 'para Natha 💗',
     appSubtitle: 'お任せカウンター',
     credit: 'por Sinfolo Nokojo',
     loading: 'Cargando Contador de Sushi...',

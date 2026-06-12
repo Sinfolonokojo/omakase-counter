@@ -142,16 +142,18 @@ function App() {
         <div className="fixed inset-0 pb-20 flex flex-col bg-glam-gradient">
           {/* Top bar with record and info */}
           <div className="flex-shrink-0 px-4 pt-8 pb-4">
-            <div className="flex justify-between items-start mb-4">
-              <div className="flex-1"></div>
-              <h1 className="text-3xl font-script text-center flex-1">
-                <span className="text-xl align-middle">✨</span>
-                <span className="text-glam-gradient px-2">{t('appName')}</span>
-                <span className="text-xl align-middle">✨</span>
+            <div className="flex justify-end mb-2">
+              <LanguageSwitcher />
+            </div>
+            <div className="text-center mb-4">
+              <h1 className="text-2xl sm:text-3xl font-script whitespace-nowrap">
+                <span className="text-lg align-middle">✨</span>
+                <span className="text-glam-gradient px-2">{t('appNameMain')}</span>
+                <span className="text-lg align-middle">✨</span>
               </h1>
-              <div className="flex-1 flex justify-end">
-                <LanguageSwitcher />
-              </div>
+              <p className="text-lg font-script mt-1">
+                <span className="text-glam-gradient">{t('appNameDedication')}</span>
+              </p>
             </div>
             <RecordIndicator
               personalRecord={personalRecord}
@@ -226,15 +228,20 @@ function App() {
         <div className="min-h-screen bg-glam-gradient pb-20">
           <div className="container mx-auto px-4 py-8 max-w-2xl">
             {/* Header */}
-            <header className="text-center mb-8">
-              <div className="flex justify-center items-center gap-4 mb-2">
-                <h1 className="text-4xl font-script">
-                  <span className="text-glam-gradient">{t('appName')}</span>
-                </h1>
+            <header className="mb-8">
+              <div className="flex justify-end mb-2">
                 <LanguageSwitcher />
               </div>
-              <p className="text-charcoal/70 text-sm">{t('appSubtitle')} ✨</p>
-              <p className="text-xs text-bubblegum/80 font-script mt-1">{t('credit')}</p>
+              <div className="text-center">
+                <h1 className="text-3xl sm:text-4xl font-script whitespace-nowrap">
+                  <span className="text-glam-gradient">{t('appNameMain')}</span>
+                </h1>
+                <p className="text-xl font-script mt-1">
+                  <span className="text-glam-gradient">{t('appNameDedication')}</span>
+                </p>
+                <p className="text-charcoal/70 text-sm mt-2">{t('appSubtitle')} ✨</p>
+                <p className="text-xs text-bubblegum/80 font-script mt-1">{t('credit')}</p>
+              </div>
             </header>
 
             {/* Types Tab */}
