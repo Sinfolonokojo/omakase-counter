@@ -7,18 +7,26 @@ export const useCamera = () => {
   const [photoData, setPhotoData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [facingMode, setFacingMode] = useState('environment');
   const videoRef = useRef(null);
+  const streamRef = useRef(null);
 
-  const startCamera = useCallback(async () => {
+  const startCamera = useCallback(async (mode = facingMode) => {
     setIsLoading(true);
     setError(null);
 
     try {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' }
+        video: { facingMode: mode }
       });
 
+      streamRef.current = mediaStream;
       setStream(mediaStream);
+      setFacingMode(mode);
 
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
@@ -30,7 +38,11 @@ export const useCamera = () => {
       setError('Camera access denied. Please enable camera permissions.');
       setIsLoading(false);
     }
-  }, []);
+  }, [facingMode]);
+
+  const flipCamera = useCallback(async () => {
+    await startCamera(facingMode === 'environment' ? 'user' : 'environment');
+  }, [facingMode, startCamera]);
 
   const capturePhoto = useCallback(async () => {
     if (!videoRef.current) return;
@@ -64,11 +76,12 @@ export const useCamera = () => {
   }, []);
 
   const stopCamera = useCallback(() => {
-    if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
       setStream(null);
     }
-  }, [stream]);
+  }, []);
 
   const handleFileInput = useCallback(async (file) => {
     try {
@@ -90,7 +103,9 @@ export const useCamera = () => {
     isLoading,
     error,
     stream,
+    facingMode,
     startCamera,
+    flipCamera,
     capturePhoto,
     retakePhoto,
     stopCamera,

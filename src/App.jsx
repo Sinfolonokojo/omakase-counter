@@ -11,6 +11,7 @@ import { useLanguage } from './hooks/useLanguage.jsx';
 // Components
 import { CounterDisplay } from './components/Counter/CounterDisplay';
 import { RecordIndicator } from './components/Counter/RecordIndicator';
+import { EndSessionModal } from './components/Counter/EndSessionModal';
 import { RecordBreakModal } from './components/Celebration/RecordBreakModal';
 import { CameraCapture } from './components/Camera/CameraCapture';
 import { PhotoPreview } from './components/Camera/PhotoPreview';
@@ -26,6 +27,7 @@ import { savePhoto } from './utils/db';
 function App() {
   const [activeTab, setActiveTab] = useState('counter');
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showEndSession, setShowEndSession] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [celebrationTriggered, setCelebrationTriggered] = useState(false);
   const [tapTrigger, setTapTrigger] = useState(0);
@@ -51,7 +53,9 @@ function App() {
     videoRef,
     photoData,
     error: cameraError,
+    facingMode,
     startCamera,
+    flipCamera,
     capturePhoto,
     retakePhoto,
     stopCamera,
@@ -72,6 +76,7 @@ function App() {
 
   const handleTakePhoto = async () => {
     setShowCelebration(false);
+    setShowEndSession(false);
     setShowCamera(true);
     await startCamera();
   };
@@ -106,6 +111,7 @@ function App() {
   };
 
   const handleEndSessionWithoutPhoto = async () => {
+    setShowEndSession(false);
     await endSession(null);
     await refreshSessions();
     startNewSession();
@@ -207,7 +213,7 @@ function App() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleEndSessionWithoutPhoto();
+                    setShowEndSession(true);
                   }}
                   className="text-sm text-bubblegum hover:text-salmon underline"
                 >
@@ -309,6 +315,14 @@ function App() {
         onClose={() => setShowCelebration(false)}
       />
 
+      <EndSessionModal
+        isOpen={showEndSession}
+        count={count}
+        onTakePhoto={handleTakePhoto}
+        onSaveWithoutPhoto={handleEndSessionWithoutPhoto}
+        onClose={() => setShowEndSession(false)}
+      />
+
       <AnimatePresence>
         {showCamera && !photoData && (
           <CameraCapture
@@ -316,6 +330,8 @@ function App() {
             onCapture={capturePhoto}
             onClose={handleCancelCamera}
             onFileSelect={handleFileInput}
+            onFlip={flipCamera}
+            facingMode={facingMode}
             error={cameraError}
           />
         )}

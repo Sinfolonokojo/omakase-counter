@@ -23,6 +23,10 @@ export const translations = {
     todaysSelection: "Today's selection:",
     more: 'more',
     endSession: 'End session and save',
+    endSessionTitle: 'Save this feast? 🍣',
+    captureMoment: 'Capture this moment?',
+    addPhoto: '📸 Add a photo',
+    saveWithoutPhoto: 'Save without photo',
 
     // Record Break Modal
     congratulations: 'Congratulations!',
@@ -97,6 +101,10 @@ export const translations = {
     todaysSelection: 'Selección de hoy:',
     more: 'más',
     endSession: 'Terminar sesión y guardar',
+    endSessionTitle: '¿Guardar este festín? 🍣',
+    captureMoment: '¿Capturar este momento?',
+    addPhoto: '📸 Añadir una foto',
+    saveWithoutPhoto: 'Guardar sin foto',
 
     // Record Break Modal
     congratulations: '¡Felicitaciones!',

@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Camera, X, Upload } from 'lucide-react';
+import { Camera, X, Upload, SwitchCamera } from 'lucide-react';
 
 export const CameraCapture = ({
   videoRef,
   onCapture,
   onClose,
   onFileSelect,
+  onFlip,
+  facingMode,
   error
 }) => {
   return (
@@ -25,6 +27,16 @@ export const CameraCapture = ({
           <X size={24} />
         </button>
 
+        <div className="flex items-center gap-2">
+          {onFlip && (
+            <button
+              onClick={onFlip}
+              className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+              aria-label="Flip camera"
+            >
+              <SwitchCamera size={24} />
+            </button>
+          )}
         <label className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
           <Upload size={24} />
           <input
@@ -39,6 +51,7 @@ export const CameraCapture = ({
             }}
           />
         </label>
+        </div>
       </div>
 
       {error ? (
@@ -68,7 +81,7 @@ export const CameraCapture = ({
               ref={videoRef}
               autoPlay
               playsInline
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${facingMode === 'user' ? '-scale-x-100' : ''}`}
             />
           </div>
 
