@@ -1,11 +1,11 @@
 {
-  "name": "Omakase Counter",
-  "short_name": "Omakase",
+  "name": "Sushi Counter for Natha 💗",
+  "short_name": "Sushi Counter",
   "description": "Track your sushi journey, break records, share with friends",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F8F7F4",
-  "theme_color": "#2C3E50",
+  "background_color": "#FFF0F6",
+  "theme_color": "#FF1493",
   "orientation": "portrait",
   "icons": [
     {

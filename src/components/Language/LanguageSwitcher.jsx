@@ -9,7 +9,7 @@ export const LanguageSwitcher = () => {
     <motion.button
       whileTap={{ scale: 0.95 }}
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-border-gray rounded-lg hover:border-charcoal hover:shadow-md transition-all"
+      className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-border-gray rounded-full hover:border-bubblegum hover:shadow-glam transition-all"
       aria-label="Switch language"
     >
       <Languages size={20} className="text-charcoal" />

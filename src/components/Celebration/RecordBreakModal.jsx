@@ -45,18 +45,19 @@ export const RecordBreakModal = ({
                   transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                   className="text-6xl mb-4"
                 >
-                  🎉
+                  💖🎉
                 </motion.div>
 
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-2">
-                  New Record!
+                <h2 className="text-3xl font-heading font-bold mb-2">
+                  <span className="text-glam-gradient">✨ New Record! ✨</span>
                 </h2>
 
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.3, type: 'spring' }}
-                  className="text-6xl font-bold text-salmon my-6"
+                  className="text-6xl font-bold font-heading text-glam-gold my-6"
+                  style={{ filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.5))' }}
                 >
                   {count}
                 </motion.div>
@@ -77,13 +78,13 @@ export const RecordBreakModal = ({
                 <div className="flex gap-3">
                   <button
                     onClick={onSkip}
-                    className="flex-1 py-3 px-6 rounded-lg border-2 border-gray-300 text-gray-600 font-medium hover:bg-gray-50 transition-colors"
+                    className="flex-1 py-3 px-6 rounded-full border-2 border-border-gray text-bubblegum font-medium hover:bg-rice transition-colors"
                   >
                     Skip
                   </button>
                   <button
                     onClick={onTakePhoto}
-                    className="flex-1 py-3 px-6 rounded-lg bg-charcoal text-white font-medium hover:bg-gray-800 transition-colors"
+                    className="flex-1 py-3 px-6 rounded-full bg-glam-pill text-white font-medium shadow-glam hover:shadow-glam-lg transition-shadow"
                   >
                     Take Photo
                   </button>

@@ -23,6 +23,34 @@
 }
 
 @layer utilities {
+  /* Pink-to-lavender glam backdrop for full-screen views */
+  .bg-glam-gradient {
+    background: linear-gradient(160deg, #FFF0F6 0%, #FFE0EE 45%, #F3E8FF 100%);
+  }
+
+  /* Gradient-filled text (counter number, headings) */
+  .text-glam-gradient {
+    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #E91E8C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Gold-and-pink variant for record-breaking moments */
+  .text-glam-gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FF69B4 50%, #FF1493 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Glossy pink pill button fill */
+  .bg-glam-pill {
+    background: linear-gradient(180deg, #FF69B4 0%, #FF1493 100%);
+  }
+
   .safe-top {
     padding-top: env(safe-area-inset-top);
   }

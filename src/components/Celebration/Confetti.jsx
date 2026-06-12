@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 export const Confetti = () => {
   const [particles, setParticles] = useState([]);
 
-  const sushiEmojis = ['🍣', '🍱', '🍙', '🍘', '🍢', '🥟', '🦐', '🐟'];
+  const sushiEmojis = ['🍣', '🍱', '🍙', '🍘', '🍢', '🥟', '🦐', '🐟', '💖', '✨', '💕', '🎀', '👑'];
 
   useEffect(() => {
     // Generate random confetti particles (mix of colored circles and sushi emojis)
@@ -13,7 +13,7 @@ export const Confetti = () => {
       left: Math.random() * 100,
       delay: Math.random() * 0.5,
       duration: 2 + Math.random() * 2,
-      color: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181'][
+      color: ['#FF1493', '#FF69B4', '#FFD700', '#E91E8C', '#FFC1DC'][
         Math.floor(Math.random() * 5)
       ],
       size: 8 + Math.random() * 8,

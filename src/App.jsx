@@ -122,10 +122,10 @@ function App() {
 
   if (!isReady) {
     return (
-      <div className="min-h-screen bg-rice flex items-center justify-center">
+      <div className="min-h-screen bg-glam-gradient flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🍣</div>
-          <p className="text-gray-600">{t('loading')}</p>
+          <p className="text-charcoal/70">{t('loading')}</p>
         </div>
       </div>
     );
@@ -139,13 +139,15 @@ function App() {
 
       {/* Counter Tab - Full Screen */}
       {activeTab === 'counter' && (
-        <div className="fixed inset-0 pb-20 flex flex-col bg-rice">
+        <div className="fixed inset-0 pb-20 flex flex-col bg-glam-gradient">
           {/* Top bar with record and info */}
           <div className="flex-shrink-0 px-4 pt-8 pb-4">
             <div className="flex justify-between items-start mb-4">
               <div className="flex-1"></div>
-              <h1 className="text-3xl font-heading font-bold text-center text-charcoal flex-1">
-                {t('appName')}
+              <h1 className="text-3xl font-script text-center flex-1">
+                <span className="text-xl align-middle">✨</span>
+                <span className="text-glam-gradient px-2">{t('appName')}</span>
+                <span className="text-xl align-middle">✨</span>
               </h1>
               <div className="flex-1 flex justify-end">
                 <LanguageSwitcher />
@@ -159,7 +161,7 @@ function App() {
 
           {/* Main tappable area */}
           <div
-            className="flex-1 flex items-center justify-center cursor-pointer active:bg-gray-50 transition-colors"
+            className="flex-1 flex items-center justify-center cursor-pointer active:bg-bubblegum/10 transition-colors"
             onClick={(e) => {
               increment();
               setTapPosition({ x: e.clientX, y: e.clientY });
@@ -168,7 +170,7 @@ function App() {
           >
             <div className="text-center">
               <CounterDisplay count={count} isNewRecord={isNewRecord} />
-              <p className="text-gray-400 text-sm mt-4">{t('tapAnywhere')}</p>
+              <p className="text-bubblegum text-sm mt-4">{t('tapAnywhere')} 💕</p>
             </div>
           </div>
 
@@ -179,18 +181,18 @@ function App() {
           <div className="flex-shrink-0 px-4 pb-4 space-y-3">
             {selectedSushiTypes.length > 0 && (
               <div className="text-center">
-                <p className="text-xs text-gray-500 mb-2">{t('todaysSelection')}</p>
+                <p className="text-xs text-bubblegum mb-2">{t('todaysSelection')}</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {selectedSushiTypes.slice(0, 5).map((typeId) => (
                     <span
                       key={typeId}
-                      className="text-xs px-3 py-1 bg-white border border-border-gray text-gray-600 rounded-full"
+                      className="text-xs px-3 py-1 bg-white border border-border-gray text-charcoal rounded-full shadow-glam"
                     >
                       {typeId}
                     </span>
                   ))}
                   {selectedSushiTypes.length > 5 && (
-                    <span className="text-xs px-3 py-1 text-gray-500">
+                    <span className="text-xs px-3 py-1 text-bubblegum">
                       +{selectedSushiTypes.length - 5} {t('more')}
                     </span>
                   )}
@@ -205,29 +207,34 @@ function App() {
                     e.stopPropagation();
                     handleEndSessionWithoutPhoto();
                   }}
-                  className="text-sm text-gray-500 hover:text-gray-700 underline"
+                  className="text-sm text-bubblegum hover:text-salmon underline"
                 >
                   {t('endSession')}
                 </button>
               </div>
             )}
+
+            <p className="text-center text-xs text-bubblegum/80 font-script">
+              {t('credit')}
+            </p>
           </div>
         </div>
       )}
 
       {/* Other Tabs - With Container */}
       {activeTab !== 'counter' && (
-        <div className="min-h-screen bg-rice pb-20">
+        <div className="min-h-screen bg-glam-gradient pb-20">
           <div className="container mx-auto px-4 py-8 max-w-2xl">
             {/* Header */}
             <header className="text-center mb-8">
               <div className="flex justify-center items-center gap-4 mb-2">
-                <h1 className="text-4xl font-heading font-bold text-charcoal">
-                  {t('appName')}
+                <h1 className="text-4xl font-script">
+                  <span className="text-glam-gradient">{t('appName')}</span>
                 </h1>
                 <LanguageSwitcher />
               </div>
-              <p className="text-gray-600 text-sm">{t('appSubtitle')}</p>
+              <p className="text-charcoal/70 text-sm">{t('appSubtitle')} ✨</p>
+              <p className="text-xs text-bubblegum/80 font-script mt-1">{t('credit')}</p>
             </header>
 
             {/* Types Tab */}
@@ -236,7 +243,7 @@ function App() {
                 <h2 className="text-2xl font-heading font-bold text-charcoal mb-4">
                   {t('sushiTypes')}
                 </h2>
-                <p className="text-gray-600 text-sm mb-6">
+                <p className="text-charcoal/70 text-sm mb-6">
                   {t('sushiTypesDescription')}
                 </p>
                 {typesLoading ? (
@@ -246,7 +253,7 @@ function App() {
                 ) : (
                   <>
                     {selectedSushiTypes.length > 0 && (
-                      <div className="mb-6 p-4 bg-charcoal text-white rounded-lg">
+                      <div className="mb-6 p-4 bg-glam-pill text-white rounded-2xl shadow-glam">
                         <p className="text-sm font-medium mb-1">
                           ✓ {selectedSushiTypes.length} {selectedSushiTypes.length === 1 ? t('typeSelected') : t('typesSelected')}
                         </p>

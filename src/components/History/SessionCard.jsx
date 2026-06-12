@@ -19,8 +19,8 @@ export const SessionCard = ({ session, onShare }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ type: 'spring', stiffness: 300 }}
-      className={`bg-white rounded-xl shadow-md overflow-hidden border-2 hover:shadow-xl transition-shadow ${
-        session.isRecord ? 'border-salmon' : 'border-transparent'
+      className={`bg-white rounded-xl shadow-glam overflow-hidden border-2 hover:shadow-glam-lg transition-shadow ${
+        session.isRecord ? 'border-salmon' : 'border-border-gray/60'
       }`}
     >
       {session.photoUrl && (
@@ -37,7 +37,7 @@ export const SessionCard = ({ session, onShare }) => {
         <div className="flex items-start justify-between mb-2">
           <div>
             <div className="flex items-center gap-2">
-              {session.isRecord && <Trophy size={20} className="text-salmon" />}
+              {session.isRecord && <Trophy size={20} className="text-glam-gold" />}
               <h3 className="text-2xl font-bold font-heading text-charcoal">
                 {session.count} pieces
               </h3>
@@ -66,7 +66,7 @@ export const SessionCard = ({ session, onShare }) => {
               {session.sushiTypes.slice(0, 5).map((typeId) => (
                 <span
                   key={typeId}
-                  className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
+                  className="text-xs px-2 py-1 bg-rice text-charcoal rounded-full border border-border-gray"
                 >
                   {typeId}
                 </span>

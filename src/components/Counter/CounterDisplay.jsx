@@ -16,10 +16,12 @@ export const CounterDisplay = ({ count, isNewRecord }) => {
           ease: [0.34, 1.56, 0.64, 1], // Bouncy easing
         }}
         className={`text-8xl font-bold font-heading relative ${
-          isNewRecord ? 'text-salmon' : 'text-charcoal'
+          isNewRecord ? 'text-glam-gold' : 'text-glam-gradient'
         }`}
         style={{
-          filter: isNewRecord ? 'drop-shadow(0 0 20px rgba(255, 107, 107, 0.6))' : 'none',
+          filter: isNewRecord
+            ? 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 30px rgba(255, 20, 147, 0.4))'
+            : 'drop-shadow(0 0 15px rgba(255, 105, 180, 0.35))',
         }}
       >
         {count}
@@ -28,7 +30,7 @@ export const CounterDisplay = ({ count, isNewRecord }) => {
         key={`pieces-${count}`}
         initial={{ opacity: 0, y: -5 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-xl text-gray-600 mt-2"
+        className="text-xl text-charcoal/70 mt-2"
       >
         pieces
       </motion.p>

@@ -36,8 +36,8 @@ export const TypeGrid = ({ types, selectedTypes, onToggle }) => {
                   onClick={() => onToggle(type.id)}
                   className={`relative p-4 rounded-xl border-2 transition-all text-left shadow-sm ${
                     isSelected
-                      ? 'border-charcoal bg-charcoal text-white shadow-md'
-                      : 'border-border-gray hover:border-charcoal hover:shadow-xl bg-white'
+                      ? 'border-salmon bg-glam-pill text-white shadow-glam'
+                      : 'border-border-gray hover:border-bubblegum hover:shadow-glam-lg bg-white'
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -68,7 +68,7 @@ export const TypeGrid = ({ types, selectedTypes, onToggle }) => {
                     {isSelected && (
                       <div className="flex-shrink-0 ml-2">
                         <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                          <Check size={16} className="text-charcoal" />
+                          <Check size={16} className="text-salmon" />
                         </div>
                       </div>
                     )}

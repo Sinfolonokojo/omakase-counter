@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export const FloatingSushi = ({ trigger, position }) => {
   const [sushis, setSushis] = useState([]);
 
-  const sushiEmojis = ['🍣', '🍱', '🍙', '🍘', '🍢', '🥟'];
+  const sushiEmojis = ['🍣', '🍱', '🍙', '🍘', '🍢', '🥟', '💖', '✨', '💕', '🎀'];
 
   useEffect(() => {
     if (trigger > 0) {

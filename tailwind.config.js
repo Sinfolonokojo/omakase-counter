@@ -7,14 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        'rice': '#F8F7F4',
-        'charcoal': '#2C3E50',
-        'salmon': '#FF6B6B',
-        'border-gray': '#E8E8E8',
+        'rice': '#FFF0F6',
+        'charcoal': '#9D174D',
+        'salmon': '#FF1493',
+        'border-gray': '#FFC1DC',
+        'bubblegum': '#FF69B4',
+        'glam-gold': '#FFD700',
+        'lavender': '#F3E8FF',
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        'heading': ['Poppins', 'sans-serif'],
+        'heading': ['"Baloo 2"', 'Poppins', 'sans-serif'],
+        'script': ['Pacifico', 'cursive'],
+      },
+      boxShadow: {
+        'glam': '0 4px 20px rgba(255, 20, 147, 0.25)',
+        'glam-lg': '0 8px 30px rgba(255, 20, 147, 0.35)',
       },
     },
   },

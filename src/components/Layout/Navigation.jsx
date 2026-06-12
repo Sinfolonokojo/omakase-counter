@@ -11,7 +11,7 @@ export const Navigation = ({ activeTab, onTabChange }) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-border-gray safe-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur border-t border-border-gray shadow-glam safe-bottom">
       <div className="flex justify-around items-center h-16">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -21,8 +21,10 @@ export const Navigation = ({ activeTab, onTabChange }) => {
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`flex flex-col items-center justify-center gap-1 py-2 px-6 transition-colors ${
-                isActive ? 'text-charcoal' : 'text-gray-400 hover:text-gray-600'
+              className={`flex flex-col items-center justify-center gap-1 py-2 px-6 rounded-full transition-all ${
+                isActive
+                  ? 'text-salmon bg-bubblegum/10'
+                  : 'text-bubblegum/60 hover:text-bubblegum'
               }`}
               aria-label={tab.label}
             >
